@@ -17,7 +17,7 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
 
-const db = require('./config/keys').MONGO_URI
+const db = process.env.MONGOLAB_URI || require('./config/keys').MONGO_URI
 
 mongoose.connect(db, { useNewUrlParser: true })
   .then(() => {
