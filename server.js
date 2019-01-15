@@ -11,6 +11,10 @@ const productsRouter = require('./routes/products')
 
 app.use('/products', productsRouter)
 
+app.use('/', (req, res) => {
+  res.send('Visit https://ironsoul.me/backend_challenge_documentation for documentation')
+})
+
 const port = process.env.PORT || 5000
 
 app.listen(port, () => {
