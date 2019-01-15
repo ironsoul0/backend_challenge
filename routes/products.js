@@ -3,21 +3,6 @@ const Product = require('../models/product.model')
 
 const router = express.Router()
 
-router.post('/new_product', async (req, res) => {
-  const product = new Product(req.body)
-  try {
-    await product.save()
-    res.status(201).json({
-      message: 'Saved'
-    })
-  } 
-  catch (err) {
-    res.json({
-      message: 'Invalid product'
-    })
-  }
-})
-
 router.get('/single_product', async (req, res) => {
   const product_title = req.body.title
   if (!product_title) {
@@ -72,7 +57,7 @@ router.put('/purchase_product', async (req, res) => {
       })
     } else {
       if (product.inventory_count > 0) {
-        await Product.findByIdAndUpdate(product._id, { $set: {inventory_count: product.inventory_count - 1}})
+        await Product.findByIdAndUpdate(product._id, { $set: { inventory_count: product.inventory_count - 1 } })
         res.json({
           message: 'Purchase completed',
           new_inventory_count: product.inventory_count - 1
